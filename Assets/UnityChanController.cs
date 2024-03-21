@@ -28,11 +28,11 @@ public class UnityChanController : MonoBehaviour
     private GameObject scoreText;
     //得点
     private int score = 0;
-    //左ボタン押下の判定（追加）
+    //左ボタン押下の判定
     private bool isLButtonDown = false;
-    //右ボタン押下の判定（追加）
+    //右ボタン押下の判定
     private bool isRButtonDown = false;
-    //ジャンプボタン押下の判定（追加）
+    //ジャンプボタン押下の判定
     private bool isJButtonDown = false;
 
     // Start is called before the first frame update
@@ -50,14 +50,14 @@ public class UnityChanController : MonoBehaviour
         //シーン中のstateTextオブジェクトを取得
         this.stateText = GameObject.Find("GameResultText");
 
-        //シーン中のscoreTextオブジェクトを取得（追加）
+        //シーン中のscoreTextオブジェクトを取得
         this.scoreText = GameObject.Find("ScoreText");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //ゲーム終了ならUnityちゃんの動きを減衰する（追加）
+        //ゲーム終了ならUnityちゃんの動きを減衰する
         if (this.isEnd)
         {
             this.velocityZ *= this.coefficient;
@@ -71,7 +71,7 @@ public class UnityChanController : MonoBehaviour
         //上方向の入力による速度
         float inputVelocityY = 0;
 
-        //Unityちゃんを矢印キーまたはボタンに応じて左右に移動させる（追加）
+        //Unityちゃんを矢印キーまたはボタンに応じて左右に移動させる
         if ((Input.GetKey(KeyCode.LeftArrow) || this.isLButtonDown) && -this.movableRange < this.transform.position.x)
         {
             //左方向への速度を代入
@@ -83,7 +83,7 @@ public class UnityChanController : MonoBehaviour
             inputVelocityX = this.velocityX;
         }
 
-        //ジャンプしていない時にスペースまたはボタンが押されたらジャンプする（追加）
+        //ジャンプしていない時にスペースまたはボタンが押されたらジャンプする
         if ((Input.GetKeyDown(KeyCode.Space) || this.isJButtonDown) && this.transform.position.y < 0.5f)
         {
             //ジャンプアニメを再生
@@ -136,10 +136,10 @@ public class UnityChanController : MonoBehaviour
         //コインに衝突した場合
         if (other.gameObject.tag == "CoinTag")
         {
-            // スコアを加算(追加)
+            // スコアを加算
             this.score += 10;
 
-            //ScoreTextに獲得した点数を表示(追加)
+            //ScoreTextに獲得した点数を表示
             this.scoreText.GetComponent<Text>().text = "Score " + this.score + "pt";
 
 
@@ -153,35 +153,35 @@ public class UnityChanController : MonoBehaviour
         }
     }
 
-    //ジャンプボタンを押した場合の処理（追加）
+    //ジャンプボタンを押した場合の処理
     public void GetMyJumpButtonDown()
     {
         this.isJButtonDown = true;
     }
 
-    //ジャンプボタンを離した場合の処理（追加）
+    //ジャンプボタンを離した場合の処理
     public void GetMyJumpButtonUp()
     {
         this.isJButtonDown = false;
     }
 
-    //左ボタンを押し続けた場合の処理（追加）
+    //左ボタンを押し続けた場合の処理
     public void GetMyLeftButtonDown()
     {
         this.isLButtonDown = true;
     }
-    //左ボタンを離した場合の処理（追加）
+    //左ボタンを離した場合の処理
     public void GetMyLeftButtonUp()
     {
         this.isLButtonDown = false;
     }
 
-    //右ボタンを押し続けた場合の処理（追加）
+    //右ボタンを押し続けた場合の処理
     public void GetMyRightButtonDown()
     {
         this.isRButtonDown = true;
     }
-    //右ボタンを離した場合の処理（追加）
+    //右ボタンを離した場合の処理
     public void GetMyRightButtonUp()
     {
         this.isRButtonDown = false;
